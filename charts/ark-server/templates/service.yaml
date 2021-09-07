@@ -12,14 +12,14 @@ spec:
       targetPort: query
       protocol: UDP
       name: query
-    # - port: 7777
-    #   targetPort: client
-    #   protocol: UDP
-    #   name: client
-    # - port: 7778
-    #   targetPort: raw
-    #   protocol: UDP
-    #   name: raw
+    - port: 7777
+      targetPort: client
+      protocol: UDP
+      name: client
+    - port: 7778
+      targetPort: raw
+      protocol: UDP
+      name: raw
     # - port: 27020
     #   targetPort: rcon
     #   protocol: TCP
