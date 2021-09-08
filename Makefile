@@ -4,6 +4,7 @@ IMAGE_VERSION = latest
 IMAGE_ORG = flaccid
 IMAGE_TAG = $(DOCKER_REGISTRY)/$(IMAGE_ORG)/$(IMAGE_NAME):$(IMAGE_VERSION)
 export DOCKER_BUILDKIT = 1
+export DOCKER_BUILD_PROGRESS_TYPE = plain
 
 WORKING_DIR := $(shell pwd)
 
@@ -20,7 +21,7 @@ docker-build:: ## builds the docker image locally
 		@echo http_proxy=$(HTTP_PROXY) http_proxy=$(HTTPS_PROXY)
 		@echo building $(IMAGE_TAG)
 		docker build --pull \
-			--progress plain \
+			--progress $(DOCKER_BUILD_PROGRESS_TYPE) \
 			--build-arg=http_proxy=$(HTTP_PROXY) \
 			--build-arg=https_proxy=$(HTTPS_PROXY) \
 			-t $(IMAGE_TAG) $(WORKING_DIR)
