@@ -2,9 +2,9 @@ FROM steamcmd/steamcmd
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN=true
 ENV STEAM_APP_ID=376030
-ENV STEAM_INTALL_DIR=/home/steam
+ENV STEAM_INSTALL_DIR=/home/steam
 RUN apt-get -y update && \
-    apt-get -y install bash libsdl2-dev && \
+    apt-get -y install bash libsdl2-2.0-0:i386 && \
     rm -rf /var/lib/apt/lists/* && \
     adduser --gecos "" --disabled-password steam
 RUN su - steam -c "steamcmd +login anonymous +force_install_dir $STEAM_INSTALL_DIR +app_update $STEAM_APP_ID +quit"
