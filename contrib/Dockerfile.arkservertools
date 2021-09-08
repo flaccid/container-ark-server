@@ -1,0 +1,9 @@
+FROM alpine
+ADD https://github.com/arkmanager/ark-server-tools/archive/refs/tags/v1.6.60b.tar.gz /tmp/ark-server-tools.tar.gz
+RUN apk add --update --no-cache tar curl && \
+  cd /tmp && \
+   tar zxvf ark-server-tools.tar.gz && \
+   mv -v /tmp/ark-server-tools-1.6.60b /opt/ark-server-tools && \
+   mkdir /opt/steamcmd && \
+   cd /opt/steamcmd && \
+   curl http://media.steampowered.com/installer/steamcmd_linux.tar.gz | tar -vxz
