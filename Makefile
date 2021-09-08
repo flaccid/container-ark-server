@@ -29,6 +29,10 @@ docker-run:: ## runs the docker image locally
 		@docker run \
 			--rm \
 			-it \
+			-p 27015/udp \
+			-p 7777/udp \
+			-p 7778/udp \
+			-p 27020/tcp \
 				$(DOCKER_REGISTRY)/$(IMAGE_ORG)/$(IMAGE_NAME):$(IMAGE_VERSION)
 
 docker-run-shell:: ## runs the docker image locally but with shell
@@ -38,19 +42,35 @@ docker-run-shell:: ## runs the docker image locally but with shell
 				$(DOCKER_REGISTRY)/$(IMAGE_ORG)/$(IMAGE_NAME):$(IMAGE_VERSION) /bin/bash
 
 helm-install:: ## installs using helm from chart in repo
-		@helm install --namespace ark ark-server ./charts/ark-server
+		@helm install \
+			-f helm-values.prd.yaml \
+			--namespace ark \
+				ark-server charts/ark-server
 
 helm-upgrade:: ## upgrades deployed helm release
-		@helm upgrade --namespace ark ark-server ./charts/ark-server
+		@helm upgrade \
+			-f helm-values.prd.yaml \
+			--namespace ark \
+				ark-server charts/ark-server
 
 helm-uninstall:: ## deletes and purges deployed helm release
-		@helm uninstall --namespace ark ark-server
+		@helm uninstall \
+			--namespace ark \
+				ark-server
 
 helm-render:: ## prints out the rendered chart
-		@helm install --namespace ark --dry-run --debug charts/ark-server
+		@helm install \
+			-f helm-values.prd.yaml \
+			--namespace ark \
+			--dry-run \
+			--debug \
+				ark-server charts/ark-server
 
 helm-validate:: ## runs a lint on the helm chart
-		@helm lint charts/ark-server
+		@helm lint \
+			-f helm-values.prd.yaml \
+			--namespace ark \
+				charts/ark-server
 
 # a help target including self-documenting targets (see the awk statement)
 define HELP_TEXT
