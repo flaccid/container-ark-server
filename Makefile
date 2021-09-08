@@ -26,8 +26,18 @@ docker-build:: ## builds the docker image locally
 			--build-arg=https_proxy=$(HTTPS_PROXY) \
 			-t $(IMAGE_TAG) $(WORKING_DIR)
 
+docker-build-debian:: ## builds the docker image locally (debian)
+		@echo http_proxy=$(HTTP_PROXY) http_proxy=$(HTTPS_PROXY)
+		@echo building $(IMAGE_TAG)
+		docker build --pull \
+			-f Dockerfile.debian \
+			--progress $(DOCKER_BUILD_PROGRESS_TYPE) \
+			--build-arg=http_proxy=$(HTTP_PROXY) \
+			--build-arg=https_proxy=$(HTTPS_PROXY) \
+			-t $(IMAGE_TAG) $(WORKING_DIR)
+
 docker-run:: ## runs the docker image locally
-		@docker run \
+		docker run \
 			--rm \
 			-it \
 			-p 27015/udp \
