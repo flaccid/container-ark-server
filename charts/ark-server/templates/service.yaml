@@ -12,17 +12,17 @@ spec:
       targetPort: query
       protocol: UDP
       name: query
-    - port: 7777
-      targetPort: client
-      protocol: UDP
-      name: client
-    - port: 7778
-      targetPort: raw
-      protocol: UDP
-      name: raw
-    - port: 27020
-      targetPort: rcon
-      protocol: TCP
-      name: rcon
+    # - port: 7777
+    #   targetPort: client
+    #   protocol: UDP
+    #   name: client
+    # - port: 7778
+    #   targetPort: raw
+    #   protocol: UDP
+    #   name: raw
+    # - port: 27020
+    #   targetPort: rcon
+    #   protocol: TCP
+    #   name: rcon
   selector:
     {{- include "ark-server.selectorLabels" . | nindent 4 }}
