@@ -1,2 +1,2 @@
 scrap.txt
-helm-values.local.yaml
+helm-values.*.yaml
